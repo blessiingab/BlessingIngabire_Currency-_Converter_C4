@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Currency Converter</title>
+  <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, rgb(6, 5, 5),rgb(120, 103, 7));
+  color: #333;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.converter {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(5, 4, 4, 0.1);
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.converter:hover {
+  transform: translateY(-3px);
+}
+
+.converter h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #0c0c0c;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+  color: #555;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.3rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  background: goldenrod;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #000000;
+}
+
+.result {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #020202;
+  font-weight: 500;
+}
+@media (max-width: 480px) {
+  .converter {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .converter h2 {
+    font-size: 1.5rem;
+  }
+
+  input, select, button {
+    font-size: 0.95rem;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="converter">
+    <h2> Welcome Currency Converter</h2>
+
+    <label for="fromCurrency">From Currency:</label>
+    <select id="fromCurrency">
+      <option value="USD">USD</option>
+      <option value="JPY">JPY</option>
+      <option value="EUR">EUR</option>
+      <option value="RUB">RUB</option>
+      <option value="GBP">GBP</option>
+      <option value="RWF">RWF</option>
+      <option value="NRA">NRA</option>
+      <option value="SHL">SHL</option>
+    </select>
+
+    <label for="toCurrency">To Currency:</label>
+    <select id="toCurrency">
+      <option value="USD">USD</option>
+      <option value="JPY">JPY</option>
+      <option value="EUR">EUR</option>
+      <option value="RUB">RUB</option>
+      <option value="GBP">GBP</option>
+      <option value="RWF">RWF</option>
+      <option value="NRA">NRA</option>
+      <option value="SHL">SHL</option>
+    </select>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <button onclick="convert()">Convert</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const currencies = {
+      USD: 1.0,
+      JPY: 113.5,
+      EUR: 0.89,
+      RUB: 74.36,
+      GBP: 0.75,
+      RWF: 9.86,
+      NRA: 1200,
+      SHL: 2900,
+    };
+
+    function convert() {
+      let currency_from = document.getElementById('fromCurrency').value.toUpperCase();
+      let currency_to = document.getElementById('toCurrency').value.toUpperCase();
+      let amount = parseFloat(document.getElementById('amount').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!currencies[currency_from] || !currencies[currency_to]) {
+        resultDiv.textContent = "Currency not found!";
+        return;
+      }
+
+      if (isNaN(amount) || amount <= 0) {
+        resultDiv.textContent = "Please enter a valid amount!";
+        return;
+      }
+
+      let conv = (amount * currencies[currency_to]) / currencies[currency_from];
+      resultDiv.textContent = `${amount} ${currency_from} = ${conv.toFixed(2)} ${currency_to}`;
+    }
+  </script>
+</body>
+</html>
