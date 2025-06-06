@@ -1,146 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Unique Currency Converter</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Currency Converter</title>
   <style>
-    :root {
-      --bg-color: #f0f4f8;
-      --card-color: #ffffff;
-      --text-color: #1f2d3d;
-      --accent: #4a90e2;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body.dark {
-      --bg-color: #1f2d3d;
-      --card-color: #2f3e4e;
-      --text-color: #f5f5f5;
-      --accent: #00d2d3;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, rgb(6, 5, 5),rgb(120, 103, 7));
+  color: #333;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.converter {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(5, 4, 4, 0.1);
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.3s, color 0.3s;
-    }
+.converter:hover {
+  transform: translateY(-3px);
+}
 
-    .container {
-      background-color: var(--card-color);
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      transition: background-color 0.3s;
-    }
+.converter h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #0c0c0c;
+  margin-bottom: 1.5rem;
+}
 
-    h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-    }
+label {
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+  color: #555;
+}
 
-    label {
-      font-weight: 600;
-      display: block;
-      margin-top: 1rem;
-    }
+input, select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.3rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
 
-    select, input {
-      width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.4rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #f9f9f9;
-      transition: border-color 0.3s;
-    }
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
 
-    input:focus, select:focus {
-      border-color: var(--accent);
-      outline: none;
-    }
+button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  background: goldenrod;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-    button {
-      margin-top: 1.5rem;
-      width: 100%;
-      padding: 0.8rem;
-      background-color: var(--accent);
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+button:hover {
+  background: #000000;
+}
 
-    button:hover {
-      background-color: darken(var(--accent), 10%);
-    }
+.result {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #020202;
+  font-weight: 500;
+}
+@media (max-width: 480px) {
+  .converter {
+    padding: 1.5rem 1.2rem;
+  }
 
-    .result {
-      margin-top: 1.5rem;
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
+  .converter h2 {
+    font-size: 1.5rem;
+  }
 
-    .toggle-mode {
-      text-align: center;
-      margin-top: 1rem;
-    }
+  input, select, button {
+    font-size: 0.95rem;
+  }
+}
 
-    .toggle-mode button {
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.9rem;
-      text-decoration: underline;
-    }
+
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <h2>Ìºç Currency Converter</h2>
+  <div class="converter">
+    <h2> Welcome Currency Converter</h2>
 
     <label for="fromCurrency">From Currency:</label>
     <select id="fromCurrency">
-      <option value="USD">USD - US Dollar</option>
-      <option value="EUR">EUR - Euro</option>
-      <option value="GBP">GBP - British Pound</option>
-      <option value="JPY">JPY - Japanese Yen</option>
-      <option value="RUB">RUB - Russian Ruble</option>
-      <option value="RWF">RWF - Rwandan Franc</option>
-      <option value="NRA">NRA - Naira</option>
-      <option value="SHL">SHL - Somali Shilling</option>
+      <option value="USD">USD</option>
+      <option value="JPY">JPY</option>
+      <option value="EUR">EUR</option>
+      <option value="RUB">RUB</option>
+      <option value="GBP">GBP</option>
+      <option value="RWF">RWF</option>
+      <option value="NRA">NRA</option>
+      <option value="SHL">SHL</option>
     </select>
 
     <label for="toCurrency">To Currency:</label>
     <select id="toCurrency">
-      <option value="USD">USD - US Dollar</option>
-      <option value="EUR">EUR - Euro</option>
-      <option value="GBP">GBP - British Pound</option>
-      <option value="JPY">JPY - Japanese Yen</option>
-      <option value="RUB">RUB - Russian Ruble</option>
-      <option value="RWF">RWF - Rwandan Franc</option>
-      <option value="NRA">NRA - Naira</option>
-      <option value="SHL">SHL - Somali Shilling</option>
+      <option value="USD">USD</option>
+      <option value="JPY">JPY</option>
+      <option value="EUR">EUR</option>
+      <option value="RUB">RUB</option>
+      <option value="GBP">GBP</option>
+      <option value="RWF">RWF</option>
+      <option value="NRA">NRA</option>
+      <option value="SHL">SHL</option>
     </select>
 
     <label for="amount">Amount:</label>
@@ -148,48 +140,39 @@
 
     <button onclick="convert()">Convert</button>
     <div class="result" id="result"></div>
-
-    <div class="toggle-mode">
-      <button onclick="toggleMode()">Ìºó Toggle Dark Mode</button>
-    </div>
   </div>
 
   <script>
     const currencies = {
       USD: 1.0,
-      EUR: 0.89,
-      GBP: 0.75,
       JPY: 113.5,
+      EUR: 0.89,
       RUB: 74.36,
+      GBP: 0.75,
       RWF: 9.86,
       NRA: 1200,
-      SHL: 2900
+      SHL: 2900,
     };
 
     function convert() {
-      const from = document.getElementById('fromCurrency').value.split(' ')[0];
-      const to = document.getElementById('toCurrency').value.split(' ')[0];
-      const amount = parseFloat(document.getElementById('amount').value);
+      let currency_from = document.getElementById('fromCurrency').value.toUpperCase();
+      let currency_to = document.getElementById('toCurrency').value.toUpperCase();
+      let amount = parseFloat(document.getElementById('amount').value);
       const resultDiv = document.getElementById('result');
 
-      if (!currencies[from] || !currencies[to]) {
-        resultDiv.textContent = "‚ùå Invalid currency selection.";
+      if (!currencies[currency_from] || !currencies[currency_to]) {
+        resultDiv.textContent = "Currency not found!";
         return;
       }
 
       if (isNaN(amount) || amount <= 0) {
-        resultDiv.textContent = "‚ö†Ô∏è Please enter a valid amount.";
+        resultDiv.textContent = "Please enter a valid amount!";
         return;
       }
 
-      const converted = (amount * currencies[to]) / currencies[from];
-      resultDiv.textContent = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle('dark');
+      let conv = (amount * currencies[currency_to]) / currencies[currency_from];
+      resultDiv.textContent = `${amount} ${currency_from} = ${conv.toFixed(2)} ${currency_to}`;
     }
   </script>
-
 </body>
 </html>
